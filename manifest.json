@@ -1,0 +1,55 @@
+// manifest.json - the extension's table of contents.
+// Chrome reads this file first. It declares what the extension is called, what it is
+// allowed to do, and which of the other files play which role. Nothing here is code.
+{
+  // Always 3 for modern Chrome extensions.
+  "manifest_version": 3,
+
+  // Shown on the chrome://extensions page and in the Web Store.
+  "name": "Explain this with Claude",
+  "version": "1.0.0",
+  "description": "Highlight any text, right-click, and get a plain-English explanation from Claude.",
+
+  // Chrome APIs the extension may use:
+  //   contextMenus - add the right-click menu item
+  //   storage      - save the API key
+  //   scripting    - inject content.js into pages opened before install
+  //   activeTab    - talk to the tab the user clicked in
+  "permissions": ["contextMenus", "storage", "scripting", "activeTab"],
+
+  // Websites the extension may send requests to. Only the Claude API.
+  "host_permissions": ["https://api.anthropic.com/*"],
+
+  // The service worker: runs in the background, creates the menu item, calls Claude.
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  // Runs inside every web page so it can draw the explanation panel.
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+
+  // The settings page where the user pastes their API key.
+  "options_page": "options.html",
+
+  // Logo shown on the extensions page and in the Web Store.
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  // The toolbar button next to the address bar.
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Explain this with Claude"
+  }
+}
