@@ -92,3 +92,8 @@ artwork, keeping the names, and reload the extension.
 3. Highlight some text on any page, right-click, and pick **Explain this with Claude**.
 
 After editing any file, click the reload arrow on the extension card so Chrome picks up the change.
+
+## Contributions
+
+This repository does not accept contributions, issues or pull requests. The code is here for
+you to use: clone it or fork it and build your own version.
